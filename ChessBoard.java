@@ -1,4 +1,4 @@
-public class ChessBoard extends FullSquare {
+public class ChessBoard {
 	// ----------
 	// fields
 	// ----------
@@ -7,10 +7,6 @@ public class ChessBoard extends FullSquare {
 	// ----------
 	// constructors
 	// ----------
-
-	public ChessBoard (int setPieceSide, int setX, int setY) {
-		super (setPieceSide, setX, setY);
-	}
 
 
 	// ----------
@@ -34,7 +30,7 @@ public class ChessBoard extends FullSquare {
 		}
 
 		/*
-		
+
 		i, j
 		(0, 0) (1, 0) (2, 0)
 		(0, 1) (1, 1) (2, 1)
@@ -43,6 +39,6 @@ public class ChessBoard extends FullSquare {
 		*/
 
 		squareObject[0][1].printMethod();
-		
+
 	}
 }
