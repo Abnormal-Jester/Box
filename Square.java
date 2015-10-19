@@ -21,7 +21,7 @@ public class Square {
 	// methods
 	// ----------
 
-	public void printSquare() {
+	public void getSquare() {
 		System.out.print("(" + xSquare + ", " + ySquare + ")");
 	}
 
