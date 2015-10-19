@@ -4,8 +4,12 @@ public class FullSquare extends Square {
 	// fields
 	// ----------
 
+	final char blankPiece = '_';
+	final char blackPiece = 'O';
+	final char whitePiece = 'X';
 	char pieceType; // 'X' 'O'
-	final int pieceSide;
+	boolean openSquare;
+	int pieceSide;
 
 	// ----------
 	// constructors
@@ -15,15 +19,16 @@ public class FullSquare extends Square {
 		super (setX, setY);
 		pieceSide = setPieceSide;
 
-		if (pieceSide == 0) {
-			pieceType = 'X';
+		if (pieceSide == -1) {
+			pieceType = blankPiece;
 		}
-		else if (pieceSide == 1) {
-			pieceType = 'O';
+		else if (pieceSide == 0) {
+			pieceType = whitePiece;
 		}
-		else {
-			pieceType = ' ';
+		else if (pieceSide == 0) {
+			pieceType = blackPiece;
 		}
+		changeSquare(setPieceSide);
 	}
 
 
@@ -31,9 +36,30 @@ public class FullSquare extends Square {
 	// methods
 	// ----------
 
-	public void printMethod() {
-		super.printMethod();
-		System.out.println("printed in FullSquare");
+	@Override
+	public void getSquare() {
+		System.out.print(pieceType);
 	}
 
+<<<<<<< HEAD
+=======
+	public void changeSquare(int setPieceSide) {
+		pieceSide = setPieceSide;
+
+		if (pieceSide == -1) {
+			pieceType = blankPiece;
+			openSquare = true;
+		}
+		else {
+			openSquare = false;
+
+			if (pieceSide == 0) {
+				pieceType = blackPiece;
+			}
+			else if (pieceSide == 1) {
+				pieceType = whitePiece;
+			}
+		}
+	}
+>>>>>>> origin/master
 }
