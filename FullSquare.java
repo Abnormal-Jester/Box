@@ -1,5 +1,5 @@
 public class FullSquare extends Square {
-	
+
 	// ----------
 	// fields
 	// ----------
@@ -31,9 +31,9 @@ public class FullSquare extends Square {
 	// methods
 	// ----------
 
-	public void printMethod() {
-		super.printMethod();
-		System.out.println("printed in FullSquare");
+	@Override
+	public void printSquare() {
+		System.out.print(pieceType);
 	}
 
 }

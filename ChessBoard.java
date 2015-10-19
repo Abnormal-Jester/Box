@@ -38,7 +38,7 @@ public class ChessBoard {
 
 		*/
 
-		squareObject[0][1].printMethod();
+		squareObject[0][1].printSquare();
 
 	}
 }
