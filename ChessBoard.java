@@ -1,7 +1,25 @@
+
+
+import java.util.Scanner;
+
 public class ChessBoard {
 	// ----------
 	// fields
 	// ----------
+
+	// setting up the ChessBoard
+	final static int boardWidth = 3;
+	final static int boardHeight = boardWidth;
+
+	static FullSquare[][] squareObject = new FullSquare[boardHeight][boardWidth];
+
+	// saved positions
+	static int xChoose = 0;
+	static int yChoose = 0;
+	static int xMove = 0;
+	static int yMove = 0;
+
+	static int curSide = 1;
 
 
 	// ----------
@@ -13,7 +31,7 @@ public class ChessBoard {
 	// methods
 	// ----------
 
-	// Method printBoard
+	// method printBoard
 
 	/*
 
@@ -27,21 +45,21 @@ public class ChessBoard {
 
 	*/
 
-	public static void printBoard (FullSquare[][] printObjectA) {
+	public static void printBoard () {
 		// side line and all square
-		for (int j = printObjectA.length-1; j >= 0; j--) {
+		for (int j = squareObject.length-1; j >= 0; j--) {
 			System.out.print((char) ('a' + j));
 			System.out.print(" ||");
-			for (int i = 0; i <= printObjectA[0].length-1; i++) {
+			for (int i = 0; i <= squareObject[0].length-1; i++) {
 				System.out.print(' ');
-				printObjectA[i][j].getSquare();
+				squareObject[i][j].getSquare();
 			}
 			System.out.println();
 		}
 
 		// bottom line
 		System.out.print("    ");
-		for (int i = 0; i <= printObjectA[0].length-1; i++) {
+		for (int i = 0; i <= squareObject[0].length-1; i++) {
 			System.out.print("==");
 		}
 		System.out.print('=');
@@ -49,24 +67,52 @@ public class ChessBoard {
 
 		// bottom label
 		System.out.print("    ");
-		for (int i = 0; i <= printObjectA[0].length-1; i++) {
+		for (int i = 0; i <= squareObject[0].length-1; i++) {
 			System.out.print(' ');
 			System.out.print(i + 1);
 		}
 		System.out.println();
 	}
 
+	public static void changeSquare () {
+		squareObject[xChoose][yChoose].changeSquare(curSide);
+		curSide = (curSide + 1) % 2;
+	}
+
+
+	// temp
+	public static int intCheck () // returns a integers that the user inputs
+   {
+      //Set up the scanner
+      Scanner intInput = new Scanner (System.in);
+      int a = -1;
+
+      System.out.print("Enter an integer: ");
+
+      // repeat until the user inputs a positive integer
+      while (a < 0 || a > 2)
+      {
+         if (intInput.hasNextInt())
+         {
+            a = intInput.nextInt();
+         }
+         if (a < 0 || a > 2) // if the correct input hasn't been entered yet
+         {
+            System.out.print("Invalid. ");
+            intInput.nextLine();
+         }
+
+      }
+
+      return a;
+
+   } // intCheck
 
 	// ----------
 	// main
 	// ----------
 
 	public static void main(String[] args) {
-		final int boardWidth = 3;
-		final int boardHeight = boardWidth;
-
-		// setting up the ChessBoard
-		FullSquare[][] squareObject = new FullSquare[boardHeight][boardWidth];
 
 		for (int j = 0; j <= boardHeight-1; j++) {
 			for (int i = 0; i <= boardWidth-1; i++) {
@@ -74,7 +120,16 @@ public class ChessBoard {
 			}
 		}
 
-		printBoard(squareObject);
+		printBoard();
+
+		for (int i = 1; i <= 9 ; i++) {
+			System.out.print("Enter the x coordinate. ");
+			xChoose = intCheck();
+			System.out.print("Enter the y coordinate. ");
+			yChoose = intCheck();
+			changeSquare();
+			printBoard();
+		}
 
 	}
 }
