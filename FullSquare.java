@@ -1,5 +1,5 @@
 public class FullSquare extends Square {
-	
+
 	// ----------
 	// fields
 	// ----------
@@ -18,7 +18,7 @@ public class FullSquare extends Square {
 		if (pieceSide == 0) {
 			pieceType = 'X';
 		}
-		else if (pieceSide == 0) {
+		else if (pieceSide == 1) {
 			pieceType = 'O';
 		}
 		else {
