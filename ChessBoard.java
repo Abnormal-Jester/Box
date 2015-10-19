@@ -16,8 +16,8 @@ public class ChessBoard {
 	// saved positions
 	static int xChoose = 0;
 	static int yChoose = 0;
-	static int xMove = 0;
-	static int yMove = 0;
+	//static int xMove = 0;
+	//static int yMove = 0;
 
 	static int curSide = 1;
 
@@ -75,36 +75,45 @@ public class ChessBoard {
 	}
 
 	public static void changeSquare () {
-		squareObject[xChoose][yChoose].changeSquare(curSide);
-		curSide = (curSide + 1) % 2;
+		if (squareObject[xChoose][yChoose].openSquare) {
+			squareObject[xChoose][yChoose].changeSquare(curSide);
+			curSide = (curSide + 1) % 2;
+		}
+		else {
+			System.out.println("You can't move there.");
+		}
 	}
 
-
-	// temp
-	public static int intCheck () // returns a integers that the user inputs
+	public static void squareChoose () // returns a integers that the user inputs
    {
       //Set up the scanner
       Scanner intInput = new Scanner (System.in);
       int a = -1;
-
-      System.out.print("Enter an integer: ");
+		int b = -1;
 
       // repeat until the user inputs a positive integer
-      while (a < 0 || a > 2)
+      while (b < 0 || b > 2)
       {
          if (intInput.hasNextInt())
          {
             a = intInput.nextInt();
+				if (intInput.hasNextInt())
+	         {
+	            b = intInput.nextInt();
+	         }
          }
-         if (a < 0 || a > 2) // if the correct input hasn't been entered yet
+         if (a < 0 || a > 2 || b < 0 || b > 2) // if the correct input hasn't been entered yet
          {
             System.out.print("Invalid. ");
+				a = -1;
+				b = -1;
             intInput.nextLine();
          }
 
       }
 
-      return a;
+		xChoose = a;
+		yChoose = b;
 
    } // intCheck
 
@@ -122,14 +131,14 @@ public class ChessBoard {
 
 		printBoard();
 
-		for (int i = 1; i <= 9 ; i++) {
-			System.out.print("Enter the x coordinate. ");
-			xChoose = intCheck();
-			System.out.print("Enter the y coordinate. ");
-			yChoose = intCheck();
+		for (int i = 1; i <= 5 ; i++) {
+			System.out.print("Enter the coordinate. ");
+			squareChoose();
 			changeSquare();
 			printBoard();
 		}
 
+		System.out.println("Thanks for Playing");
+		System.exit(0);
 	}
 }
