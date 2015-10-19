@@ -1,5 +1,5 @@
 public class Square {
-	
+
 	// ----------
 	// fields
 	// ----------
@@ -21,9 +21,8 @@ public class Square {
 	// methods
 	// ----------
 
-	public void printMethod() {
-		System.out.println("Printed in Square.");
-		System.out.println(xSquare + ", " + ySquare);
+	public void getSquare() {
+		System.out.print("(" + xSquare + ", " + ySquare + ")");
 	}
 
 }
