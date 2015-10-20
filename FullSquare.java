@@ -12,18 +12,6 @@ public class FullSquare extends Square {
 	// ----------
 
 	public FullSquare (int setPieceSide, int setX, int setY) {
-		super (setX, setY);
-		pieceSide = setPieceSide;
-
-		if (pieceSide == 0) {
-			pieceType = 'X';
-		}
-		else if (pieceSide == 1) {
-			pieceType = 'O';
-		}
-		else {
-			pieceType = ' ';
-		}
 	}
 
 
