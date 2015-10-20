@@ -17,6 +17,17 @@ public class FullSquare extends Square {
 
 	public FullSquare (int setPieceSide, int setX, int setY) {
 		super (setX, setY);
+		pieceSide = setPieceSide;
+
+		if (pieceSide == -1) {
+			pieceType = blankPiece;
+		}
+		else if (pieceSide == 0) {
+			pieceType = whitePiece;
+		}
+		else if (pieceSide == 0) {
+			pieceType = blackPiece;
+		}
 		changeSquare(setPieceSide);
 	}
 
@@ -30,6 +41,8 @@ public class FullSquare extends Square {
 		System.out.print(pieceType);
 	}
 
+<<<<<<< HEAD
+=======
 	public void changeSquare(int setPieceSide) {
 		pieceSide = setPieceSide;
 
@@ -48,4 +61,5 @@ public class FullSquare extends Square {
 			}
 		}
 	}
+>>>>>>> origin/master
 }
