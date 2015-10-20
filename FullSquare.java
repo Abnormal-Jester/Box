@@ -41,8 +41,6 @@ public class FullSquare extends Square {
 		System.out.print(pieceType);
 	}
 
-<<<<<<< HEAD
-=======
 	public void changeSquare(int setPieceSide) {
 		pieceSide = setPieceSide;
 
@@ -61,5 +59,4 @@ public class FullSquare extends Square {
 			}
 		}
 	}
->>>>>>> origin/master
 }
