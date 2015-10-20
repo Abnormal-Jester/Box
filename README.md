@@ -11,6 +11,11 @@ Run Java with command prompt with
    2 Find folder in java
       cd file\folder
    3 Run javac
-      javac JavaFile.java
+      javac *.java
    4 Run the code
       java -cp . ClassFile
+
+Create and run a jar file
+   1 Create the jar
+      jar -cvfm TicTacToe.jar manifest.txt *.class
+   2 java -jar TicTacToe.jar
