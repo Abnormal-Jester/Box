@@ -46,13 +46,15 @@ public class ChessBoard {
 	*/
 
 	public static void printBoard () {
+		char squareHold;
 		// side line and all square
 		for (int j = squareObject.length-1; j >= 0; j--) {
 			System.out.print((char) ('a' + j));
 			System.out.print(" ||");
 			for (int i = 0; i <= squareObject[j].length-1; i++) {
 				System.out.print(' ');
-				squareObject[i][j].getSquare();
+				squareHold = squareObject[i][j].getPieceType();
+				System.out.print(squareHold);
 			}
 			System.out.println();
 		}
@@ -75,8 +77,8 @@ public class ChessBoard {
 	}
 
 	public static void changeSquare () {
-		if (squareObject[xChoose][yChoose].openSquare) {
-			squareObject[xChoose][yChoose].changeSquare(curSide);
+		if (squareObject[xChoose][yChoose].getOpenSquare()) {
+			squareObject[xChoose][yChoose].setPieceSide(curSide);
 			curSide = (curSide + 1) % 2;
 		}
 		else {
@@ -86,26 +88,30 @@ public class ChessBoard {
 
 	public static void checkWin () {
 		boolean getWinCondition = false;
-		char charWinCondition = squareObject[0][0].blankPiece;
+		char charWinCondition = ' ';
 		int tieCheck = 0;
 
 		for (int i = 0; i <= 2; i++) {
-			if ((squareObject[i][0].pieceType != squareObject[0][0].blankPiece) && (squareObject[i][0].pieceType == squareObject[i][1].pieceType) && (squareObject[i][1].pieceType == squareObject[i][2].pieceType)) {
+			if (!squareObject[i][0].getOpenSquare() && (squareObject[i][0].getPieceType() == squareObject[i][1].getPieceType())
+																 && (squareObject[i][1].getPieceType() == squareObject[i][2].getPieceType()) ) {
 				getWinCondition = true;
-				charWinCondition = squareObject[i][0].pieceType;
+				charWinCondition = squareObject[i][0].getPieceType();
 			}
-			if ((squareObject[0][i].pieceType != squareObject[0][0].blankPiece) && (squareObject[0][i].pieceType == squareObject[1][i].pieceType) && (squareObject[1][i].pieceType == squareObject[2][i].pieceType)) {
+			if (!squareObject[0][i].getOpenSquare() && (squareObject[0][i].getPieceType() == squareObject[1][i].getPieceType())
+																 && (squareObject[1][i].getPieceType() == squareObject[2][i].getPieceType()) ) {
 				getWinCondition = true;
-				charWinCondition = squareObject[0][i].pieceType;
+				charWinCondition = squareObject[0][i].getPieceType();
 			}
 		}
-		if ((squareObject[1][1].pieceType != squareObject[0][0].blankPiece) && (squareObject[0][0].pieceType == squareObject[1][1].pieceType) && (squareObject[1][1].pieceType == squareObject[2][2].pieceType)) {
+		if (!squareObject[1][1].getOpenSquare() && (squareObject[0][0].getPieceType() == squareObject[1][1].getPieceType())
+															 && (squareObject[1][1].getPieceType() == squareObject[2][2].getPieceType()) ) {
 			getWinCondition = true;
-			charWinCondition = squareObject[1][1].pieceType;
+			charWinCondition = squareObject[1][1].getPieceType();
 		}
-		if ((squareObject[1][1].pieceType != squareObject[0][0].blankPiece) && (squareObject[0][2].pieceType == squareObject[1][1].pieceType) && (squareObject[1][1].pieceType == squareObject[2][0].pieceType)) {
+		if (!squareObject[1][1].getOpenSquare() && (squareObject[2][0].getPieceType() == squareObject[1][1].getPieceType())
+															 && (squareObject[1][1].getPieceType() == squareObject[0][2].getPieceType()) ) {
 			getWinCondition = true;
-			charWinCondition = squareObject[1][1].pieceType;
+			charWinCondition = squareObject[1][1].getPieceType();
 		}
 		if (getWinCondition) {
 			System.out.println(charWinCondition + " has won!");
@@ -115,7 +121,7 @@ public class ChessBoard {
 
 		for (int j = 0; j <= squareObject.length-1; j++) {
 			for (int i = 0; i <= squareObject[j].length-1; i++) {
-				if (squareObject[i][j].pieceType != squareObject[0][0].blankPiece) {
+				if (!squareObject[i][j].getOpenSquare()) {
 					tieCheck++;
 				}
 			}
