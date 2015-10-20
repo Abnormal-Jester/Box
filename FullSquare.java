@@ -18,16 +18,6 @@ public class FullSquare extends Square {
 	public FullSquare (int setPieceSide, int setX, int setY) {
 		super (setX, setY);
 		pieceSide = setPieceSide;
-
-		if (pieceSide == -1) {
-			pieceType = blankPiece;
-		}
-		else if (pieceSide == 0) {
-			pieceType = whitePiece;
-		}
-		else if (pieceSide == 0) {
-			pieceType = blackPiece;
-		}
 		changeSquare(setPieceSide);
 	}
 
