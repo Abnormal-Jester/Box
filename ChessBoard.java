@@ -50,7 +50,7 @@ public class ChessBoard {
 		for (int j = squareObject.length-1; j >= 0; j--) {
 			System.out.print((char) ('a' + j));
 			System.out.print(" ||");
-			for (int i = 0; i <= squareObject[0].length-1; i++) {
+			for (int i = 0; i <= squareObject[j].length-1; i++) {
 				System.out.print(' ');
 				squareObject[i][j].getSquare();
 			}
@@ -84,38 +84,87 @@ public class ChessBoard {
 		}
 	}
 
-	public static void squareChoose () // returns a integers that the user inputs
-   {
-      //Set up the scanner
-      Scanner intInput = new Scanner (System.in);
-      int a = -1;
-		int b = -1;
+	public static void checkWin () {
+		boolean getWinCondition = false;
+		char charWinCondition = squareObject[0][0].blankPiece;
+		int tieCheck = 0;
 
-      // repeat until the user inputs a positive integer
-      while (b < 0 || b > 2)
-      {
-         if (intInput.hasNextInt())
-         {
-            a = intInput.nextInt();
-				if (intInput.hasNextInt())
-	         {
-	            b = intInput.nextInt();
-	         }
+		for (int i = 0; i <= 2; i++) {
+			if ((squareObject[i][0].pieceType != squareObject[0][0].blankPiece) && (squareObject[i][0].pieceType == squareObject[i][1].pieceType) && (squareObject[i][1].pieceType == squareObject[i][2].pieceType)) {
+				getWinCondition = true;
+				charWinCondition = squareObject[i][0].pieceType;
+			}
+			if ((squareObject[0][i].pieceType != squareObject[0][0].blankPiece) && (squareObject[0][i].pieceType == squareObject[1][i].pieceType) && (squareObject[1][i].pieceType == squareObject[2][i].pieceType)) {
+				getWinCondition = true;
+				charWinCondition = squareObject[0][i].pieceType;
+			}
+		}
+		if ((squareObject[1][1].pieceType != squareObject[0][0].blankPiece) && (squareObject[0][0].pieceType == squareObject[1][1].pieceType) && (squareObject[1][1].pieceType == squareObject[2][2].pieceType)) {
+			getWinCondition = true;
+			charWinCondition = squareObject[1][1].pieceType;
+		}
+		if ((squareObject[1][1].pieceType != squareObject[0][0].blankPiece) && (squareObject[0][2].pieceType == squareObject[1][1].pieceType) && (squareObject[1][1].pieceType == squareObject[2][0].pieceType)) {
+			getWinCondition = true;
+			charWinCondition = squareObject[1][1].pieceType;
+		}
+		if (getWinCondition) {
+			System.out.println(charWinCondition + " has won!");
+			System.out.println("Thanks for Playing");
+			System.exit(0);
+		}
+
+		for (int j = 0; j <= squareObject.length-1; j++) {
+			for (int i = 0; i <= squareObject[j].length-1; i++) {
+				if (squareObject[i][j].pieceType != squareObject[0][0].blankPiece) {
+					tieCheck++;
+				}
+			}
+		}
+		if (tieCheck >= 9) {
+			System.out.println("The game is a tie.");
+			System.out.println("Thanks for Playing");
+			System.exit(0);
+		}
+	}
+
+	public static void squareChoose () {
+      Scanner inScanner = new Scanner (System.in);
+
+      String finalOut = inScanner.next().toLowerCase();
+      boolean cont = true;
+
+      while (cont == true) {
+         // somehow the user inputs a blank input
+
+         if (finalOut.length() == 0 || finalOut == null) {
+            System.out.print("How the heck did you do that!? ");
          }
-         if (a < 0 || a > 2 || b < 0 || b > 2) // if the correct input hasn't been entered yet
-         {
+
+         // universal inputs
+
+         // exit
+         else if (finalOut.equals("exit")) {
+				System.out.println("Thanks for Playing");
+            System.exit(0);
+            cont = false;
+         }
+
+			else if (finalOut.length() >= 2) {
+				xChoose = Character.getNumericValue(finalOut.charAt(1))-1;
+				yChoose = Character.getNumericValue(finalOut.charAt(0))-10;
+				if ((xChoose >= 0 && xChoose <= 2) && (yChoose >= 0 && yChoose <= 2)) {
+					cont = false;
+				}
+			}
+
+			if (cont) {
+				finalOut = inScanner.nextLine();
             System.out.print("Invalid. ");
-				a = -1;
-				b = -1;
-            intInput.nextLine();
-         }
+            finalOut = inScanner.next();
+			}
+		}
 
-      }
-
-		xChoose = a;
-		yChoose = b;
-
-   } // intCheck
+	}
 
 	// ----------
 	// main
@@ -131,14 +180,17 @@ public class ChessBoard {
 
 		printBoard();
 
-		for (int i = 1; i <= 5 ; i++) {
-			System.out.print("Enter the coordinate. ");
+		System.out.println("Welcome to Jarett's Tic-Tac-Toe.");
+		System.out.println("Type \"exit\" to end the program at any time.");
+		System.out.println("The format of a square is letter then number - (a2).");
+		System.out.println("Have fun!");
+
+		while	(true) {
+			System.out.print("Enter a square: ");
 			squareChoose();
 			changeSquare();
 			printBoard();
+			checkWin();
 		}
-
-		System.out.println("Thanks for Playing");
-		System.exit(0);
 	}
 }
